@@ -1,0 +1,30 @@
+/*
+Theme Name: Ratchet
+Theme URI: http://premium.wpmudev.org/
+Author: Chris Knowles
+Author URI: http://twitter.com/ChrisKnowles
+Description: A Ratchet theme for WordPress (http://goratchet.com)
+Version: 1.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Tags: mobile
+Text Domain: ratchet
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned with others.
+*/
+
+@import url('css/ratchet.css');
+
+.content {
+	width: 400px;
+}
+
+.featured-post img {
+	width: 100%;
+	margin: 0 0 10px 0;
+}
+
+article img {
+	width: 100%;
+}
