@@ -6,27 +6,38 @@
 
 get_header(); ?>
 
-	<div class="content-padded">
-		<?php while ( have_posts() ) : the_post(); ?>
+	<div class="category-header"><?php the_category(', '); ?></div> 
 
-			<article>
-			
-				<header>
-					<?php the_post_thumbnail(); ?>
-					<h1><?php the_title(); ?></h1>
-				<header>
+	<?php while ( have_posts() ) : the_post(); ?>
+
+	<article>
+	
+		<header class="content-padded">
+			<h2 class="headline"><?php the_title(); ?></h2>
+			<h1><?php the_excerpt(); ?></h1>
+			<div class="post-meta">
+				By <?php the_author();?>, <?php the_date('F j, Y'); ?>					
+			</div>
+		</header>
+
+	
+		<?php if ( has_post_thumbnail() ): ?>
+		<figure>
+			<?php the_post_thumbnail(); ?>	
+			<figcaption><?php the_post_thumbnail_field( 'caption', get_the_ID() ); ?></figcaption>
+		</figure>						
+		<?php endif; ?>
 				
-				<div class="article-body">
+		<div class="article-body content-padded">
 				
-					<?php the_content(); ?>
+			<?php the_content(); ?>
 				
-				</div>
-			
-			</article>
+		</div>
+	
+	</article>
 			
 
-		<?php endwhile; // end of the loop. ?>
+	<?php endwhile; // end of the loop. ?>
 
-	</div><!-- .content-padded -->
 
 <?php get_footer(); ?>

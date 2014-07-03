@@ -2,7 +2,7 @@
 /**
  * The Header template for our theme
  *
- * Displays all of the <head> section and everything up till <div id="main">
+ * Displays all of the <head> section and everything up till <div class="content">
  *
  */
 ?><html>
@@ -16,6 +16,12 @@
     	<!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
     	<meta name="apple-mobile-web-app-capable" content="yes">
     	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+    	
+    	<!-- Web App icons -->
+		<link rel="apple-touch-icon" href="<?php echo get_stylesheet_directory_uri(); ?>/icons/ios/icon.png" />
+      	<link rel="apple-touch-icon" sizes="72x72" href="<?php echo get_stylesheet_directory_uri(); ?>icons/ios/icon-72.png" />
+      	<link rel="apple-touch-icon" sizes="114x114" href="<?php echo get_stylesheet_directory_uri(); ?>icons/ios/icon@2x.png" />
+      	<link rel="apple-touch-icon" sizes="144x144" href="<?php echo get_stylesheet_directory_uri(); ?>icons/ios/icon-72@2x.png" />
 
 		<?php wp_head(); ?>
   	</head>
@@ -27,33 +33,19 @@
     		<?php if ( !is_home() ) { ?>
     		<a class="icon icon-home pull-left" href="<?php bloginfo( 'url' );?>"></a>
     		<?php } ?>
-      		<h1 class="title">
-      			<a href="#menu-popover">
-      				<?php bloginfo( 'name' ); ?>
-      				<span class="icon icon-caret"></span>
-      			</a>
-      		</h1>
-    		<div id="menu-popover" class="popover">
-  				<ul class="table-view">
-	  				<!-- list of categories -->
-  					<?php 
-  						$args = array('orderby' => 'name', 'order' => 'ASC');
-  						$categories = get_categories( $args );
-  						
-  						foreach( $categories as $category ) {
-  						
- 							echo '<li class="table-view-cell">
- 									<a href="' . get_category_link( $category->term_id ) . '">' . 
- 										$category->name . 
- 									'</a></li>'; 						
-  						
-  						}
-  					
-  					
-  					?> 
-			  </ul>
-			</div>
+      		<h1 class="title"><?php bloginfo( 'name' ); ?></h1>
+      		<a class="icon icon-bars pull-right" href="#catmenu-popover"></a>
+      		<a class="icon icon-star-filled pull-right" href="#tagmenu-popover"></a>
       	</header>
+
+    		<div id="tagmenu-popover" class="popover tagmenu">
+  				<!-- list of post_tags -->
+				<?php ratchet_popover_table('post_tag'); ?>
+			</div>
+
+    		<div id="catmenu-popover" class="popover catmenu">
+				<?php ratchet_popover_table('category'); ?>
+			</div>
 
     	<!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
     	<div class="content">

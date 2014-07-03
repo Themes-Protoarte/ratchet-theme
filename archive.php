@@ -8,35 +8,29 @@ get_header(); ?>
 
 		<div role="main">
 		
+			<h1 class="category-header"><?php single_cat_title( '', true ); ?></h1> 
+		
 		<?php if ( have_posts() ) : ?>
 
-			<ul class="table-view">
-
 			<?php /* Start the Loop */ ?>
+			
+			<?php $is_first = true; ?>
+			
 			<?php while ( have_posts() ) : the_post(); ?>
 			
-				<?php if ( is_sticky() ) : ?>
-				
-				<li class="table-view-cell media featured-post">
-					<img class="media-object" src="http://placehold.it/640x150">
-					<a class="navigate-right" href="<?php echo get_permalink(); ?>">
-						<div class="media-body featured-post">
-							<?php the_title(); ?>		
-						</div>
-					</a>
-				</li>
-				
-				<?php else: ?>
+				<?php if ( $is_first && has_post_thumbnail() ) :
+					echo get_the_post_thumbnail( get_the_ID() ); ?>
 
-				<li class="table-view-cell media">
-					<a class="navigate-right" href="<?php echo get_permalink(); ?>">
-						<img class="media-object pull-left" src="http://placehold.it/50x50">
-						<div class="media-body">
-							<?php the_title(); ?>		
-						</div>						
-					<?php endif; ?>
-					</a>
+			<ul id="post-list" class="table-view">
+			
+				<?php endif; ?>
+
+				<li class="table-view-cell">
+					<h2 class="headline"><a href="<?php echo get_permalink(); ?>"><?php the_title(); ?></a></h2>
+					<div><?php the_excerpt(); ?></div>
 				</li>
+				
+				<?php $is_first = false; ?>
 				
 			<?php endwhile; ?>
 			
@@ -59,6 +53,6 @@ get_header(); ?>
 
 		<?php endif; // end have_posts() check ?>
 
-		</div><!-- .content-padded -->
-
+		</div><!-- main -->
+		
 <?php get_footer(); ?>
